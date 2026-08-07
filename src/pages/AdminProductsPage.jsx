@@ -6,6 +6,7 @@ import AdminProductCard from "../components/AdminProductCard";
 import Pagination from "../components/Pagination";
 import { useProducts } from "../context/products/ProductsContext";
 import SearchProduct from "../components/SearchProduct";
+import { Helmet } from "react-helmet-async";
 
 function AdminProductsPage() {
   const { loading, products, refreshPagination } = useProducts();
@@ -40,59 +41,70 @@ function AdminProductsPage() {
   }
 
   return (
-    <div className="container py-4">
-      <div className="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
-        <div>
-          <h1 className="fw-bold d-flex align-items-center gap-2 mb-1">
-            <BsBoxSeam />
-            Products Management
-          </h1>
+    <>
+      <Helmet>
+        <title>Admin Products | MyStore</title>
 
-          <p className="text-muted mb-0">
-            Manage your store products ({products.length} total)
-          </p>
-        </div>
+        <meta
+          name="description"
+          content="Manage products from MyStore administration panel."
+        />
+      </Helmet>
 
-        <Link
-          className="btn btn-success d-flex align-items-center gap-2"
-          to="/admin/add-product"
-        >
-          <BsPlusCircle />
-          Add Product
-        </Link>
-      </div>
+      <div className="container py-4">
+        <div className="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+          <div>
+            <h1 className="fw-bold d-flex align-items-center gap-2 mb-1">
+              <BsBoxSeam />
+              Products Management
+            </h1>
 
-      <SearchProduct admin={true} />
+            <p className="text-muted mb-0">
+              Manage your store products ({products.length} total)
+            </p>
+          </div>
 
-      {products.length === 0 ? (
-        <div className="alert alert-warning text-center py-5">
-          <h4>No products available</h4>
-
-          <p className="mb-3">Start by creating your first product.</p>
-
-          <Link className="btn btn-success" to="/admin/add-product">
+          <Link
+            className="btn btn-success d-flex align-items-center gap-2"
+            to="/admin/add-product"
+          >
+            <BsPlusCircle />
             Add Product
           </Link>
         </div>
-      ) : (
-        <>
-          <div className="row g-4">
-            {currentProducts.map((product) => (
-              <div className="col-12 col-md-6 col-lg-4" key={product.id}>
-                <AdminProductCard product={product} />
-              </div>
-            ))}
-          </div>
 
-          <Pagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={changePage}
-            variant="success"
-          />
-        </>
-      )}
-    </div>
+        <SearchProduct admin={true} />
+
+        {products.length === 0 ? (
+          <div className="alert alert-warning text-center py-5">
+            <h4>No products available</h4>
+
+            <p className="mb-3">Start by creating your first product.</p>
+
+            <Link className="btn btn-success" to="/admin/add-product">
+              Add Product
+            </Link>
+          </div>
+        ) : (
+          <>
+            <div className="row g-4">
+              {currentProducts.map((product) => (
+                <div className="col-12 col-md-6 col-lg-4" key={product.id}>
+                  <AdminProductCard product={product} />
+                </div>
+              ))}
+            </div>
+
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={changePage}
+              variant="success"
+            />
+          </>
+        )}
+      </div>
+    </>
   );
 }
 

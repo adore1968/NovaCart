@@ -17,6 +17,7 @@ import EditProductPage from "./pages/EditProductPage";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Footer from "./components/Footer";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -47,6 +48,8 @@ function App() {
                   element={<EditProductPage />}
                 />
               </Route>
+
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </main>
           <Footer />

@@ -6,6 +6,12 @@ function AdminProductCard({ product }) {
   const { id, imageUrl, category, name, price } = product;
   const { deleteProduct } = useProducts();
 
+  const handleDeleteProduct = (id) => {
+    if (window.confirm("Are you sure you want to delete this product?")) {
+      deleteProduct(id);
+    }
+  };
+
   return (
     <div className="card h-100 shadow-sm border-0">
       <img
@@ -36,7 +42,7 @@ function AdminProductCard({ product }) {
           <button
             className="btn btn-danger d-flex align-items-center justify-content-center gap-2"
             type="button"
-            onClick={() => deleteProduct(id)}
+            onClick={() => handleDeleteProduct(id)}
           >
             <BsTrash />
             Delete
