@@ -4,6 +4,7 @@ import { BsCheckCircle } from "react-icons/bs";
 import { useNavigate, useParams } from "react-router-dom";
 import { useProducts } from "../context/products/ProductsContext";
 import { uploadImage } from "../services/cloudinary";
+import { VscLoadingCompact } from "react-icons/vsc";
 
 function ProductForm() {
   const {
@@ -15,6 +16,7 @@ function ProductForm() {
   } = useForm();
   const [preview, setPreview] = useState("");
   const [currentImage, setCurrentImage] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const { getProduct, createProduct, editProduct } = useProducts();
   const navigate = useNavigate();
@@ -60,6 +62,8 @@ function ProductForm() {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
+      setLoading(true);
+
       let imageUrl = currentImage;
 
       if (data.image?.length > 0) {
@@ -84,6 +88,8 @@ function ProductForm() {
       navigate("/admin/products");
     } catch (error) {
       console.error(error);
+    } finally {
+      setLoading(false);
     }
   });
 
@@ -222,9 +228,22 @@ function ProductForm() {
       <button
         className="btn btn-primary w-100 d-flex align-items-center justify-content-center gap-2"
         type="submit"
+        disabled={VscLoadingCompact}
       >
-        <BsCheckCircle />
-        {id ? "Update Product" : "Create Product"}
+        {loading ? (
+          <>
+            <span
+              className="spinner-border spinner-border-sn"
+              aria-hidden="true"
+            ></span>
+            <span>{id ? "Updating..." : "Creating..."}</span>
+          </>
+        ) : (
+          <>
+            <BsCheckCircle />
+            {id ? "Update Product" : "Create Product"}
+          </>
+        )}
       </button>
     </form>
   );
