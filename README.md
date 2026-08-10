@@ -8,7 +8,7 @@ Las imágenes de los productos se gestionan mediante Cloudinary, mientras que lo
 
 ## 🚀 Demo
 
-🔗 [Ver aplicación]([TU_URL_DE_VERCEL](https://nova-cart-theta.vercel.app))
+🔗 [Ver aplicación](https://nova-cart-theta.vercel.app)
 
 ## 📸 Capturas de pantalla
 
