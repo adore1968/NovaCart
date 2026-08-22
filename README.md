@@ -1,6 +1,6 @@
-# 🛒 MyStore
+# 🛒 NovaCart
 
-MyStore es una aplicación web de comercio electrónico desarrollada con React y Vite.
+NovaCart es una aplicación web de comercio electrónico desarrollada con React y Vite.
 
 La aplicación permite a los usuarios explorar productos, buscar productos, consultar sus detalles y administrar un carrito de compras. También cuenta con un panel de administración desde el cual se pueden crear, editar y eliminar productos.
 
