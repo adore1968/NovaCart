@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import { ProductsContext } from "./ProductsContext";
+import { useEffect, useState, type ReactNode } from "react";
 import {
   getProductRequest,
   getProductsRequest,
@@ -8,24 +7,35 @@ import {
   editProductRequest,
 } from "../../api/products";
 import { toast } from "react-toastify";
+import { ProductsContext } from "./ProductsContext";
+import type {
+  Product,
+  ProductFormType,
+  ProductValid,
+} from "../../types/productsTypes";
+import axios from "axios";
 
-function ProductsProvider({ children }) {
-  const [loading, setLoading] = useState(true);
-  const [products, setProducts] = useState([]);
-  const [search, setSearch] = useState("");
-  const [refreshPagination, setRefreshPagination] = useState(0);
+type ProductsProviderProps = {
+  children: ReactNode;
+};
 
-  const handleSearch = (value) => {
+function ProductsProvider({ children }: ProductsProviderProps) {
+  const [loading, setLoading] = useState<boolean>(true);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [search, setSearch] = useState<string>("");
+  const [refreshPagination, setRefreshPagination] = useState<number>(0);
+
+  const handleSearch = (value: string): void => {
     setSearch(value.trim());
     setRefreshPagination((prev) => prev + 1);
   };
 
-  const getProducts = async (search) => {
+  const getProducts = async (search: string): Promise<void> => {
     try {
       const res = await getProductsRequest(search);
       setProducts(res.data);
     } catch (error) {
-      if (error.response?.status === 404) {
+      if (axios.isAxiosError(error) && error.response?.status === 404) {
         setProducts([]);
       } else {
         console.log(error);
@@ -36,7 +46,7 @@ function ProductsProvider({ children }) {
     }
   };
 
-  const getProduct = async (id) => {
+  const getProduct = async (id: string): Promise<Product | undefined> => {
     try {
       const res = await getProductRequest(id);
       return res.data;
@@ -46,7 +56,7 @@ function ProductsProvider({ children }) {
     }
   };
 
-  const createProduct = async (product) => {
+  const createProduct = async (product: ProductValid): Promise<void> => {
     try {
       const res = await createProductRequest(product);
 
@@ -61,7 +71,10 @@ function ProductsProvider({ children }) {
     }
   };
 
-  const editProduct = async (id, product) => {
+  const editProduct = async (
+    id: string,
+    product: ProductValid,
+  ): Promise<void> => {
     try {
       const res = await editProductRequest(id, product);
 
@@ -78,7 +91,7 @@ function ProductsProvider({ children }) {
     }
   };
 
-  const deleteProduct = async (id) => {
+  const deleteProduct = async (id: string): Promise<void> => {
     try {
       await deleteProductRequest(id);
 
@@ -105,7 +118,6 @@ function ProductsProvider({ children }) {
         loading,
         products,
         refreshPagination,
-        getProducts,
         getProduct,
         createProduct,
         editProduct,

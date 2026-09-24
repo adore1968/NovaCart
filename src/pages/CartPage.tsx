@@ -1,8 +1,8 @@
-import { useCart } from "../context/cart/CartContext";
 import CartItem from "../components/CartItem";
 import Summary from "../components/Summary";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import { useCart } from "../context/cart/CartContext";
 
 function CartPage() {
   const { cart } = useCart();

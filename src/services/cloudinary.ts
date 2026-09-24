@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const uploadImage = async (file) => {
+export const uploadImage = async (file: File) => {
   const formData = new FormData();
 
   formData.append("file", file);
@@ -16,6 +16,10 @@ export const uploadImage = async (file) => {
     );
     return res.data;
   } catch (error) {
-    console.log(error.response?.data);
+    if (axios.isAxiosError(error)) {
+      console.log(error.response?.data);
+    }
+
+    throw error;
   }
 };

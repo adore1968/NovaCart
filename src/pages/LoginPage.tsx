@@ -3,18 +3,19 @@ import { useNavigate } from "react-router-dom";
 import { BsEnvelope, BsLock } from "react-icons/bs";
 import { useAuth } from "../context/auth/AuthContext";
 import { Helmet } from "react-helmet-async";
+import type { UserForm } from "../types/authTypes";
 
 function LoginPage() {
   const {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm();
+  } = useForm<UserForm>();
 
   const navigate = useNavigate();
   const { login } = useAuth();
 
-  const onSubmit = handleSubmit((data) => {
+  const onSubmit = handleSubmit((data): void => {
     const session = login(data);
 
     if (!session) return;

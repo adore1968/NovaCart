@@ -2,7 +2,11 @@ import { useForm } from "react-hook-form";
 import { BsSearch } from "react-icons/bs";
 import { useProducts } from "../context/products/ProductsContext";
 
-function SearchProduct({ admin }) {
+type SearchProductType = {
+  role: string | undefined;
+};
+
+function SearchProduct({ role }: SearchProductType) {
   const { register } = useForm();
   const { handleSearch } = useProducts();
 
@@ -16,7 +20,9 @@ function SearchProduct({ admin }) {
         type="text"
         className="form-control"
         placeholder={
-          admin ? "Search producs to manage..." : "Search products..."
+          role === "admin"
+            ? "Search producs to manage..."
+            : "Search products..."
         }
         {...register("product", {
           onChange: (e) => handleSearch(e.target.value),

@@ -1,14 +1,9 @@
 import { Routes, Route } from "react-router-dom";
-import AuthProvider from "./context/auth/AuthProvider";
-import CartProvider from "./context/cart/CartProvider";
-import ProductsProvider from "./context/products/ProductsProvider";
 import HomePage from "./pages/HomePage";
-import LoginPage from "./pages/LoginPage";
 import ProductsPage from "./pages/ProductsPage";
 import ProductPage from "./pages/ProductPage";
 import Navbar from "./components/Navbar";
 import ProtectedRoute from "./components/ProtectedRoute";
-import CartPage from "./pages/CartPage";
 import ProfilePage from "./pages/ProfilePage";
 import AdminRoute from "./components/AdminRoute";
 import AdminProductsPage from "./pages/AdminProductsPage";
@@ -18,6 +13,11 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Footer from "./components/Footer";
 import NotFound from "./pages/NotFound";
+import AuthProvider from "./context/auth/AuthProvider";
+import LoginPage from "./pages/LoginPage";
+import ProductsProvider from "./context/products/ProductsProvider";
+import CartProvider from "./context/cart/CartProvider";
+import CartPage from "./pages/CartPage";
 
 function App() {
   return (

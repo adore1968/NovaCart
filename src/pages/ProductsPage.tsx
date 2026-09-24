@@ -3,16 +3,18 @@ import { BsBoxSeam } from "react-icons/bs";
 import Loader from "../components/Loader";
 import ProductCard from "../components/ProductCard";
 import Pagination from "../components/Pagination";
-import { useProducts } from "../context/products/ProductsContext";
 import SearchProduct from "../components/SearchProduct";
 import { Helmet } from "react-helmet-async";
+import { useProducts } from "../context/products/ProductsContext";
+import { useAuth } from "../context/auth/AuthContext";
 
 function ProductsPage() {
   const { loading, products, refreshPagination } = useProducts();
+  const { user } = useAuth();
 
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
-  const productsPerPage = 8;
+  const productsPerPage: number = 8;
 
   const totalPages = Math.ceil(products.length / productsPerPage);
 
@@ -26,7 +28,7 @@ function ProductsPage() {
     setCurrentPage(1);
   }, [refreshPagination]);
 
-  const changePage = (page) => {
+  const changePage = (page: number): void => {
     setCurrentPage(page);
 
     window.scrollTo({
@@ -62,7 +64,7 @@ function ProductsPage() {
             </p>
           </div>
         </div>
-        <SearchProduct />
+        <SearchProduct role={user?.role} />
 
         {products.length === 0 ? (
           <div className="alert alert-info text-center py-5">

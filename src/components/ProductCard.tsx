@@ -2,8 +2,13 @@ import { Link } from "react-router-dom";
 import { BsCartPlus, BsEye, BsStarFill } from "react-icons/bs";
 import { useAuth } from "../context/auth/AuthContext";
 import { useCart } from "../context/cart/CartContext";
+import type { Product } from "../types/productsTypes";
 
-function ProductCard({ product }) {
+type ProductCardProps = {
+  product: Product;
+};
+
+function ProductCard({ product }: ProductCardProps) {
   const { id, imageUrl, category, name, description, price } = product;
   const { handleAddCart } = useCart();
   const { user } = useAuth();

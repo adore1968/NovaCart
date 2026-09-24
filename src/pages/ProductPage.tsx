@@ -2,23 +2,26 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { BsCartPlus } from "react-icons/bs";
 import Loader from "../components/Loader";
-import { useProducts } from "../context/products/ProductsContext";
-import { useCart } from "../context/cart/CartContext";
 import { useAuth } from "../context/auth/AuthContext";
 import { Helmet } from "react-helmet-async";
+import { useProducts } from "../context/products/ProductsContext";
+import { useCart } from "../context/cart/CartContext";
+import type { Product } from "../types/productsTypes";
 
 function ProductPage() {
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>();
   const { getProduct } = useProducts();
   const { handleAddCart } = useCart();
   const { user } = useAuth();
 
-  const [product, setProduct] = useState(null);
+  const [product, setProduct] = useState<Product | undefined>(undefined);
 
   useEffect(() => {
     const loadProduct = async () => {
-      const data = await getProduct(id);
-      setProduct(data);
+      if (id) {
+        const data = await getProduct(id);
+        setProduct(data);
+      }
     };
 
     loadProduct();

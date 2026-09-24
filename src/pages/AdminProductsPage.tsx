@@ -3,15 +3,17 @@ import { Link } from "react-router-dom";
 import { BsBoxSeam, BsPlusCircle } from "react-icons/bs";
 import Loader from "../components/Loader";
 import AdminProductCard from "../components/AdminProductCard";
-import Pagination from "../components/Pagination";
-import { useProducts } from "../context/products/ProductsContext";
 import SearchProduct from "../components/SearchProduct";
 import { Helmet } from "react-helmet-async";
+import { useProducts } from "../context/products/ProductsContext";
+import { useAuth } from "../context/auth/AuthContext";
+import Pagination from "../components/Pagination";
 
 function AdminProductsPage() {
   const { loading, products, refreshPagination } = useProducts();
+  const { user } = useAuth();
 
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
   const productsPerPage = 6;
 
@@ -27,7 +29,7 @@ function AdminProductsPage() {
     setCurrentPage(1);
   }, [refreshPagination]);
 
-  const changePage = (page) => {
+  const changePage = (page: number) => {
     setCurrentPage(page);
 
     window.scrollTo({
@@ -73,7 +75,7 @@ function AdminProductsPage() {
           </Link>
         </div>
 
-        <SearchProduct admin={true} />
+        <SearchProduct role={user?.role} />
 
         {products.length === 0 ? (
           <div className="alert alert-warning text-center py-5">

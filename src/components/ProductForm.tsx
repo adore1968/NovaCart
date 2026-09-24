@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { BsCheckCircle } from "react-icons/bs";
 import { useNavigate, useParams } from "react-router-dom";
-import { useProducts } from "../context/products/ProductsContext";
+
 import { uploadImage } from "../services/cloudinary";
 import { VscLoadingCompact } from "react-icons/vsc";
+import { useProducts } from "../context/products/ProductsContext";
+import type { ProductFormType } from "../types/productsTypes";
 
 function ProductForm() {
   const {
@@ -13,14 +15,14 @@ function ProductForm() {
     register,
     reset,
     handleSubmit,
-  } = useForm();
-  const [preview, setPreview] = useState("");
-  const [currentImage, setCurrentImage] = useState("");
-  const [loading, setLoading] = useState(false);
+  } = useForm<ProductFormType>();
+  const [preview, setPreview] = useState<string>("");
+  const [currentImage, setCurrentImage] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
 
   const { getProduct, createProduct, editProduct } = useProducts();
   const navigate = useNavigate();
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>();
 
   const image = useWatch({
     control,
@@ -28,18 +30,21 @@ function ProductForm() {
   });
 
   useEffect(() => {
-    const loadProduct = async () => {
+    const loadProduct = async (): Promise<void> => {
       if (!id) return;
 
       const product = await getProduct(id);
-      setCurrentImage(product.imageUrl);
 
-      reset({
-        name: product.name,
-        description: product.description,
-        price: product.price,
-        category: product.category,
-      });
+      if (product) {
+        setCurrentImage(product.imageUrl);
+
+        reset({
+          name: product.name,
+          description: product.description,
+          price: product.price,
+          category: product.category,
+        });
+      }
     };
 
     loadProduct();
@@ -60,7 +65,7 @@ function ProductForm() {
     };
   }, [image]);
 
-  const onSubmit = handleSubmit(async (data) => {
+  const onSubmit = handleSubmit(async (data): Promise<void> => {
     try {
       setLoading(true);
 
@@ -74,7 +79,7 @@ function ProductForm() {
       const product = {
         name: data.name,
         description: data.description,
-        price: data.price,
+        price: Number(data.price),
         category: data.category,
         imageUrl,
       };

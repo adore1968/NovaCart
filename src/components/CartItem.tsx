@@ -1,7 +1,12 @@
 import { BsTrash } from "react-icons/bs";
 import { useCart } from "../context/cart/CartContext";
+import type { ProductCart } from "../types/cartTypes";
 
-function CartItem({ product }) {
+type CartItemProps = {
+  product: ProductCart;
+};
+
+function CartItem({ product }: CartItemProps) {
   const { id, imageUrl, name, price, quantity } = product;
   const { removeFromCart } = useCart();
 

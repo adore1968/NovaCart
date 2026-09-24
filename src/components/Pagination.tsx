@@ -1,9 +1,16 @@
+type PaginationProps = {
+  currentPage: number;
+  totalPages: number;
+  onPageChange: (page: number) => void;
+  variant?: string;
+};
+
 function Pagination({
   currentPage,
   totalPages,
   onPageChange,
   variant = "dark",
-}) {
+}: PaginationProps) {
   if (totalPages <= 1) return null;
 
   return (

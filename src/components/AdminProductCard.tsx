@@ -1,12 +1,17 @@
 import { Link } from "react-router-dom";
 import { BsPencilSquare, BsTrash } from "react-icons/bs";
 import { useProducts } from "../context/products/ProductsContext";
+import type { Product } from "../types/productsTypes";
 
-function AdminProductCard({ product }) {
+type AdminProductCardProps = {
+  product: Product;
+};
+
+function AdminProductCard({ product }: AdminProductCardProps) {
   const { id, imageUrl, category, name, price } = product;
   const { deleteProduct } = useProducts();
 
-  const handleDeleteProduct = (id) => {
+  const handleDeleteProduct = (id: string): void => {
     if (window.confirm("Are you sure you want to delete this product?")) {
       deleteProduct(id);
     }

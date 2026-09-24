@@ -14,11 +14,11 @@ import { useAuth } from "../context/auth/AuthContext";
 
 function Navbar() {
   const { user, logout } = useAuth();
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState<boolean>(false);
 
-  const closeMenu = () => setOpen(false);
+  const closeMenu = (): void => setOpen(false);
 
-  const handleLogout = () => {
+  const handleLogout = (): void => {
     logout();
     closeMenu();
   };

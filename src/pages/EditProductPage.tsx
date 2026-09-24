@@ -1,14 +1,17 @@
-import { BsPlusCircle } from "react-icons/bs";
-import ProductForm from "../components/ProductForm";
+import { BsPencilSquare } from "react-icons/bs";
 import { Helmet } from "react-helmet-async";
+import ProductForm from "../components/ProductForm";
 
-function CreateProductPage() {
+function EditProductPage() {
   return (
     <>
       <Helmet>
-        <title>Create Product | MyStore</title>
+        <title>Edit Product | MyStore</title>
 
-        <meta name="description" content="Create a new product in MyStore" />
+        <meta
+          name="description"
+          content="Edit product information in MyStore"
+        />
       </Helmet>
 
       <div className="container py-4">
@@ -16,12 +19,12 @@ function CreateProductPage() {
           <div className="card shadow-sm border-0">
             <div className="card-body p-4">
               <h1 className="h3 fw-bold d-flex align-items-center gap-2 mb-2">
-                <BsPlusCircle />
-                Add Product
+                <BsPencilSquare />
+                Edit Product
               </h1>
 
               <p className="text-muted mb-4">
-                Fill in the information below to create a new product.
+                Update the information below to edit this product.
               </p>
 
               <ProductForm />
@@ -33,4 +36,4 @@ function CreateProductPage() {
   );
 }
 
-export default CreateProductPage;
+export default EditProductPage;

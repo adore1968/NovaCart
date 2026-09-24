@@ -31,7 +31,7 @@ function ProfilePage() {
               <div className="card-body text-center">
                 <BsPersonCircle size={90} className="text-primary mb-3" />
 
-                <h3 className="fw-bold">{user?.username}</h3>
+                <h3 className="fw-bold">Hello User</h3>
 
                 <p className="text-muted mb-1">{user?.email}</p>
 
