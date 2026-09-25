@@ -1,10 +1,10 @@
 # 🛒 NovaCart
 
-NovaCart es una aplicación web de comercio electrónico desarrollada con React y Vite.
+NovaCart es una aplicación web de comercio electrónico desarrollada con **React, TypeScript y Vite**.
 
 La aplicación permite a los usuarios explorar productos, buscar productos, consultar sus detalles y administrar un carrito de compras. También cuenta con un panel de administración desde el cual se pueden crear, editar y eliminar productos.
 
-Las imágenes de los productos se gestionan mediante Cloudinary, mientras que los datos de la aplicación son gestionados mediante una API.
+Las imágenes de los productos se gestionan mediante Cloudinary, mientras que los datos de la aplicación son gestionados mediante una API REST.
 
 ## 🚀 Demo
 
@@ -89,6 +89,7 @@ Las imágenes de los productos se gestionan mediante Cloudinary, mientras que lo
 ### Frontend
 
 * React
+* TypeScript
 * Vite
 * React Router DOM
 * React Hook Form
@@ -122,20 +123,21 @@ MyStore/
 │   ├── product-details.png
 │   ├── cart.png
 │   ├── login.png
+│   ├── profile.png
 │   ├── admin-products.png
 │   ├── create-product.png
 │   └── image-upload.png
 │
 ├── src/
 │   ├── components/
-│   │   ├── AdminProductCard.jsx
-│   │   ├── CartItem.jsx
-│   │   ├── Loader.jsx
-│   │   ├── Navbar.jsx
-│   │   ├── ProductCard.jsx
-│   │   ├── ProductForm.jsx
-│   │   ├── SearchProduct.jsx
-│   │   └── Summary.jsx
+│   │   ├── AdminProductCard.tsx
+│   │   ├── CartItem.tsx
+│   │   ├── Loader.tsx
+│   │   ├── Navbar.tsx
+│   │   ├── ProductCard.tsx
+│   │   ├── ProductForm.tsx
+│   │   ├── SearchProduct.tsx
+│   │   └── Summary.tsx
 │   │
 │   ├── context/
 │   │   ├── auth/
@@ -143,23 +145,29 @@ MyStore/
 │   │   └── products/
 │   │
 │   ├── pages/
-│   │   ├── HomePage.jsx
-│   │   ├── ProductsPage.jsx
-│   │   ├── ProductPage.jsx
-│   │   ├── CartPage.jsx
-│   │   ├── LoginPage.jsx
-│   │   ├── ProfilePage.jsx
-│   │   ├── AdminProductsPage.jsx
-│   │   ├── CreateProductPage.jsx
-│   │   └── EditProductPage.jsx
+│   │   ├── HomePage.tsx
+│   │   ├── ProductsPage.tsx
+│   │   ├── ProductPage.tsx
+│   │   ├── CartPage.tsx
+│   │   ├── LoginPage.tsx
+│   │   ├── ProfilePage.tsx
+│   │   ├── AdminProductsPage.tsx
+│   │   ├── CreateProductPage.tsx
+│   │   └── EditProductPage.tsx
 │   │
 │   ├── services/
-│   │   └── cloudinary.js
+│   │   └── cloudinary.ts
 │   │
-│   └── App.jsx
+│   ├── types/
+│   │   └── ...
+│   │
+│   └── App.tsx
 │
 ├── .gitignore
 ├── package.json
+├── tsconfig.json
+├── tsconfig.app.json
+├── tsconfig.node.json
 ├── vercel.json
 └── README.md
 ```
@@ -288,7 +296,7 @@ La aplicación también maneja los casos en los que una búsqueda no devuelve re
 
 ## 📱 Diseño responsive
 
-MyStore está adaptado para diferentes tamaños de pantalla:
+NovaCart está adaptado para diferentes tamaños de pantalla:
 
 * 💻 Desktop
 * 📱 Mobile
@@ -323,8 +331,4 @@ Además, se incluye un archivo `vercel.json` para configurar correctamente las r
 
 Desarrollador Full Stack
 
-Este proyecto fue desarrollado como parte de mi portfolio para demostrar conocimientos en desarrollo web moderno, React, APIs REST, autenticación, gestión de roles, desarrollo de aplicaciones de comercio electrónico y diseño responsive.
-
----
-
-⭐ Si te gustó el proyecto, podés visitar el repositorio y explorar el código fuente.
+Este proyecto fue desarrollado como parte de mi portfolio para demostrar conocimientos en desarrollo web moderno, **React, TypeScript, APIs REST, autentic**
